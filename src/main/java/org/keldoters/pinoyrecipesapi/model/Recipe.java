@@ -5,54 +5,36 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 
-
-@Entity(name = "Recipe")
+@Entity
+@Table(name = "recipe")
 public class Recipe {
 
     @Id
-    @SequenceGenerator(
-            name = "recipe_sequence",
-            sequenceName = "recipe_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "recipe_sequence"
-    )
-    @Column(
-            name = "id",
-            updatable = false
-    )
-    private Long id;
+    @Column(name = "id")
+    private long id;
 
-    @Column(
-            name = "name",
-            nullable = false,
-            columnDefinition = "TEXT"
+    @Column(name = "instruction")
+    private String instruction;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                         CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToMany
+    @JoinTable(
+            name = "recipe_ingredient",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
-    private String name;
+    private Set<Ingredient> ingredients;
 
-    @Column(
-            name = "description",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
-    private String Description;
-
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "recipe_owner")
-    private Owner owner;
-
-    public Recipe(String name, String description) {
-        this.name = name;
-        Description = description;
-    }
 
 
 
