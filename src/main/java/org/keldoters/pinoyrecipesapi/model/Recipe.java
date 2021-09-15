@@ -3,8 +3,10 @@ package org.keldoters.pinoyrecipesapi.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -16,8 +18,12 @@ import java.util.Set;
 public class Recipe {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "instruction")
     private String instruction;
@@ -27,13 +33,26 @@ public class Recipe {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToMany
-    @JoinTable(
-            name = "recipe_ingredient",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
-    )
-    private Set<Ingredient> ingredients;
+    @OneToMany(mappedBy = "recipe",
+               cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                    CascadeType.PERSIST, CascadeType.REFRESH})
+    private Set<RecipeIngredient> ingredients;
+
+    @Override
+    public String toString() {
+        return "id: " + this.id +
+                "\ninstruction: " + this.instruction +
+                "\ncategory: " + this.category.getName() +
+                "\ningredients: " + this.ingredients;
+    }
+
+    public void addRecipeIngredient(RecipeIngredient recipeIngredient) {
+        if (ingredients == null) {
+            ingredients = new HashSet<>();
+        }
+        ingredients.add(recipeIngredient);
+        recipeIngredient.setRecipe(this);
+    }
 
 
 

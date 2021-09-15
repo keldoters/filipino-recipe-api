@@ -1,8 +1,10 @@
 package org.keldoters.pinoyrecipesapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,8 +18,9 @@ import java.util.Set;
 public class Category {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -27,6 +30,7 @@ public class Category {
                          CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<Recipe> recipes;
 
-
-
+    public Category(String name) {
+        this.name = name;
+    }
 }
