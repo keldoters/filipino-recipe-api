@@ -11,9 +11,6 @@ import org.keldoters.pinoyrecipesapi.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
 
 @Component
 public class Converter {
@@ -33,7 +30,7 @@ public class Converter {
 
     public Recipe toDAO(RecipeDTO recipeDTO) {
         Recipe newRecipe = new Recipe();
-        newRecipe.setName(recipeDTO.getName());
+        getRecipeDetails(recipeDTO, newRecipe);
         getCategoryInstance(recipeDTO.getCategory(), newRecipe);
         getInstruction(recipeDTO, newRecipe);
         getIngredientsInstance(recipeDTO, newRecipe);
@@ -60,6 +57,12 @@ public class Converter {
             ingredientRepository.save(ingredient);
         }
 
+    }
+
+    public void getRecipeDetails(RecipeDTO recipeDTO, Recipe recipe) {
+        recipe.setName(recipeDTO.getName());
+        recipe.setYoutube_url(recipeDTO.getYoutube_url());
+        recipe.setCook_time(recipeDTO.getCooktime());
     }
 
     public void getInstruction(RecipeDTO recipeDTO, Recipe recipe) {

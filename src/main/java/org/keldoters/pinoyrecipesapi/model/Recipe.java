@@ -25,6 +25,12 @@ public class Recipe {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "youtube_url")
+    private String youtube_url;
+
+    @Column(name = "cook_time")
+    private String cook_time;
+
     @Column(name = "instruction")
     private String instruction;
 
