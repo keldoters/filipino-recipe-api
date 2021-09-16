@@ -29,13 +29,13 @@ public class Recipe {
     private String instruction;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                         CascadeType.PERSIST, CascadeType.REFRESH})
+                          CascadeType.REFRESH})
     @JoinColumn(name = "category_id")
     private Category category;
 
     @OneToMany(mappedBy = "recipe",
                cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                    CascadeType.PERSIST, CascadeType.REFRESH})
+                     CascadeType.REFRESH})
     private Set<RecipeIngredient> ingredients;
 
     @Override

@@ -26,7 +26,7 @@ public class Ingredient {
 
     @OneToMany(mappedBy = "ingredient",
             cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                    CascadeType.PERSIST, CascadeType.REFRESH})
+                       CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<RecipeIngredient> recipes;
 
     public Ingredient(String name) {

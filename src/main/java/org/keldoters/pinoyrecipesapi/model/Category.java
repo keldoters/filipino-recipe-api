@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -33,4 +34,14 @@ public class Category {
     public Category(String name) {
         this.name = name;
     }
+
+    public void addRecipe(Recipe recipe) {
+        if (recipes == null) {
+            recipes = new HashSet<>();
+        }
+        recipes.add(recipe);
+        recipe.setCategory(this);
+    }
+
+
 }

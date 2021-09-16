@@ -5,7 +5,10 @@ import org.keldoters.pinoyrecipesapi.dto.util.Converter;
 import org.keldoters.pinoyrecipesapi.model.Recipe;
 import org.keldoters.pinoyrecipesapi.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 public class RecipeService {
@@ -19,6 +22,7 @@ public class RecipeService {
         this.converter = converter;
     }
 
+    @Transactional
     public void saveRecipe(RecipeDTO recipeDTO) {
         Recipe recipe = converter.toDAO(recipeDTO);
         recipeRepository.save(recipe);
