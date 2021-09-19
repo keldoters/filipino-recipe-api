@@ -11,6 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class PinoyRecipesApiApplication {
@@ -39,7 +42,11 @@ public class PinoyRecipesApiApplication {
 //					.setMeasurements(List.of("2 cups (washed)", "1 1/2 cups", "2 cups", "6 cups", "1/2 teaspoon"))
 //					.build();
 //			recipeService.saveRecipe(recipeDTO);
-			System.out.println(new RecipeDTO(recipeRepository.findByIdEagerly(5L).get()));
+//			List<RecipeDTO> list = recipeRepository.findByNameContainingIgnoreCase("&").stream()
+//					.map( recipe -> new RecipeDTO(recipe)).collect(Collectors.toList());
+//			System.out.println(list);
+
+
 
 		});
 	}
