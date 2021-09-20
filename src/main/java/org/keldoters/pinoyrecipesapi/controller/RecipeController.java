@@ -60,6 +60,7 @@ public class RecipeController {
                                           @RequestParam(required = false) String category) {
         if (ingredient != null) {
             List<RecipeDTO> recipeDTOList = recipeService.findByIngredient(ingredient);
+            System.out.println(recipeDTOList);
             return new ResponseEntity<>(Map.of("recipes", recipeDTOList), HttpStatus.OK);
         } else if (category != null) {
             List<RecipeDTO> recipeDTOList = recipeService.findByCategory(category);

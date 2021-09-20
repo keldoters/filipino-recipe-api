@@ -19,9 +19,8 @@ public class RecipeDTO {
     private Long id;
     private String name;
     private String category;
-    private String youtube_url;
-    private String cooktime;
-    private String calories;
+    private String youtubeUrl;
+    private String cookTime;
     private List<String> instruction;
     private List<String> ingredients = new ArrayList<>();
     private List<String> measurements = new ArrayList<>();
@@ -29,15 +28,15 @@ public class RecipeDTO {
 
     public RecipeDTO(String name,
                      String category,
-                     String youtube_url,
-                     String cooktime,
+                     String youtubeUrl,
+                     String cookTime,
                      String instruction,
                      List<String> ingredients,
                      List<String> measurements) {
         this.name = name;
         this.category = category;
-        this.youtube_url = youtube_url;
-        this.cooktime = cooktime;
+        this.youtubeUrl = youtubeUrl;
+        this.cookTime = cookTime;
         this.instruction = getInstructionAsList(instruction);
         this.ingredients = ingredients;
         this.measurements = measurements;
@@ -48,8 +47,8 @@ public class RecipeDTO {
         id = recipe.getId();
         name = recipe.getName();
         category = recipe.getCategory().getName();
-        youtube_url = recipe.getYoutube_url();
-        cooktime = recipe.getCook_time();
+        youtubeUrl = recipe.getYoutubeUrl();
+        cookTime = recipe.getCookTime();
         instruction = getInstructionAsList(recipe.getInstruction());
         fillIngredients(recipe.getIngredients());
 
@@ -71,8 +70,8 @@ public class RecipeDTO {
         "id: " + id +
         "\nname: " + name +
         "\ncategory: " + category +
-        "\nyoutube url: " + youtube_url +
-        "\ncook time: " + cooktime +
+        "\nyoutube url: " + youtubeUrl +
+        "\ncook time: " + cookTime +
         "\ninstruction: " + instruction +
         "\ningredients: " + ingredients +
         "\nmeasurements: " + measurements;

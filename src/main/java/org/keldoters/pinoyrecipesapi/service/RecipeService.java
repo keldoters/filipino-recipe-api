@@ -7,7 +7,6 @@ import org.keldoters.pinoyrecipesapi.model.Recipe;
 import org.keldoters.pinoyrecipesapi.repository.CategoryRepository;
 import org.keldoters.pinoyrecipesapi.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -65,18 +64,17 @@ public class RecipeService {
     }
 
     public List<RecipeDTO> findByIngredient(String ingredient) {
-        return recipeRepository.findByIngredient(ingredient)
+        return recipeRepository.findAllByIngredient(ingredient)
                 .stream()
                 .map(recipe -> new RecipeDTO(recipe))
                 .collect(Collectors.toList());
     }
 
-    public List<RecipeDTO> findByCategory(String ingredient) {
-        return recipeRepository.findByCategory(ingredient)
+    public List<RecipeDTO> findByCategory(String category) {
+        return recipeRepository.findAllByCategory(category)
                 .stream()
                 .map(recipe -> new RecipeDTO(recipe))
                 .collect(Collectors.toList());
     }
-
 
 }

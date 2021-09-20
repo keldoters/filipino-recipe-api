@@ -26,10 +26,10 @@ public class Recipe {
     private String name;
 
     @Column(name = "youtube_url")
-    private String youtube_url;
+    private String youtubeUrl;
 
     @Column(name = "cook_time")
-    private String cook_time;
+    private String cookTime;
 
     @Column(name = "instruction")
     private String instruction;
@@ -59,8 +59,5 @@ public class Recipe {
         ingredients.add(recipeIngredient);
         recipeIngredient.setRecipe(this);
     }
-
-
-
 
 }

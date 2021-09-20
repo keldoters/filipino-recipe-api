@@ -42,9 +42,8 @@ public class PinoyRecipesApiApplication {
 //					.setMeasurements(List.of("2 cups (washed)", "1 1/2 cups", "2 cups", "6 cups", "1/2 teaspoon"))
 //					.build();
 //			recipeService.saveRecipe(recipeDTO);
-//			List<RecipeDTO> list = recipeRepository.findByNameContainingIgnoreCase("&").stream()
-//					.map( recipe -> new RecipeDTO(recipe)).collect(Collectors.toList());
-//			System.out.println(list);
+//			List<RecipeDTO> recipeDTOList = recipeService.findByIngredient("chicken");
+//			System.out.println(recipeDTOList);
 
 
 
