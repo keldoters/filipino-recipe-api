@@ -1,5 +1,10 @@
 package org.keldoters.pinoyrecipesapi;
 
+
+import com.google.api.gax.paging.Page;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.*;
+import com.google.common.collect.Lists;
 import org.keldoters.pinoyrecipesapi.dto.RecipeDTO;
 import org.keldoters.pinoyrecipesapi.model.Recipe;
 import org.keldoters.pinoyrecipesapi.repository.IngredientRepository;
@@ -10,6 +15,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.io.FileInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -44,6 +52,33 @@ public class PinoyRecipesApiApplication {
 //			recipeService.saveRecipe(recipeDTO);
 //			List<RecipeDTO> recipeDTOList = recipeService.findByIngredient("chicken");
 //			System.out.println(recipeDTOList);
+			String projectId = "pinoy-recipe-f7ab3";
+			String objectName = "Pininyahang-Manok.jpg";
+			String bucketName = "pinoy-recipe-f7ab3.appspot.com";
+			String filePath = "C:/Users/mkeld/Pictures/recipe/Pininyahang-Manok.jpg";
+
+			GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("C:/Users/mkeld/Pictures/recipe/pinoy-recipe.json"))
+					.createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
+
+//			Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
+
+			Storage storage = StorageOptions.newBuilder().setProjectId(projectId).setCredentials(credentials).build().getService();
+			Bucket bucket =
+					storage.get(bucketName, Storage.BucketGetOption.fields(Storage.BucketField.values()));
+
+			// Print bucket metadata
+			System.out.println("BucketName: " + bucket.getName());
+			BlobId blobId = BlobId.of(bucketName, objectName);
+//			storage.createAcl(blobId, Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
+//			Blob blob = storage.get(blobId);
+//			blob.downloadTo(Paths.get("C:/Users/mkeld/Pictures"));
+
+			BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+			storage.create(blobInfo, Files.readAllBytes(Paths.get(filePath)));
+
+			System.out.println(
+					"File " + filePath + " uploaded to bucket " + bucketName + " as " + objectName);
+
 
 
 
