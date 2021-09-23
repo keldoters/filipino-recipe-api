@@ -24,6 +24,7 @@ public class RecipeDTO {
     private List<String> instruction;
     private List<String> ingredients = new ArrayList<>();
     private List<String> measurements = new ArrayList<>();
+    private String imageUrl;
 
 
     public RecipeDTO(String name,
@@ -32,7 +33,8 @@ public class RecipeDTO {
                      String cookTime,
                      String instruction,
                      List<String> ingredients,
-                     List<String> measurements) {
+                     List<String> measurements,
+                     String imageUrl) {
         this.name = name;
         this.category = category;
         this.youtubeUrl = youtubeUrl;
@@ -40,6 +42,7 @@ public class RecipeDTO {
         this.instruction = getInstructionAsList(instruction);
         this.ingredients = ingredients;
         this.measurements = measurements;
+        this.imageUrl = imageUrl;
     }
 
     //convert recipe instance into recipeDTO
@@ -51,7 +54,7 @@ public class RecipeDTO {
         cookTime = recipe.getCookTime();
         instruction = getInstructionAsList(recipe.getInstruction());
         fillIngredients(recipe.getIngredients());
-
+        imageUrl = recipe.getImageUrl();
     }
 
     public void fillIngredients(Set<RecipeIngredient> recipeIngredients) {
@@ -74,18 +77,21 @@ public class RecipeDTO {
         "\ncook time: " + cookTime +
         "\ninstruction: " + instruction +
         "\ningredients: " + ingredients +
-        "\nmeasurements: " + measurements;
+        "\nmeasurements: " + measurements +
+        "\nimage url: " + imageUrl;
+
     }
 
     public static class Builder {
 
         private String name;
         private String category;
-        private String youtube_url;
-        private String cooktime;
+        private String youtubeUrl;
+        private String cookTime;
         private String instruction;
         private List<String> ingredients = new ArrayList<>();
         private List<String> measurements = new ArrayList<>();
+        private String imageUrl;
 
         public Builder() {
 
@@ -105,13 +111,13 @@ public class RecipeDTO {
             return this;
         }
 
-        public Builder setYoutube_url(String youtube_url) {
-            this.youtube_url = youtube_url;
+        public Builder setYoutubeUrl(String youtubeUrl) {
+            this.youtubeUrl = youtubeUrl;
             return this;
         }
 
-        public Builder setCooktime(String cooktime) {
-            this.cooktime = cooktime;
+        public Builder setCookTime(String cookTime) {
+            this.cookTime = cookTime;
             return this;
         }
 
@@ -130,21 +136,16 @@ public class RecipeDTO {
             return this;
         }
 
+        public Builder setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+            return this;
+        }
+
         public RecipeDTO build() {
-            return new RecipeDTO(name, category, youtube_url, cooktime,
-                                 instruction, ingredients, measurements);
+            return new RecipeDTO(name, category, youtubeUrl, cookTime,
+                                 instruction, ingredients, measurements, imageUrl);
         }
 
     }
-
-
-
-
-
-
-
-
-
-
 
 }

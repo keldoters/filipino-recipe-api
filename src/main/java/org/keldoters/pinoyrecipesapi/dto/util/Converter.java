@@ -63,6 +63,7 @@ public class Converter {
         recipe.setName(recipeDTO.getName());
         recipe.setYoutubeUrl(recipeDTO.getYoutubeUrl());
         recipe.setCookTime(recipeDTO.getCookTime());
+        recipe.setImageUrl(recipeDTO.getImageUrl());
     }
 
     public void getInstruction(RecipeDTO recipeDTO, Recipe recipe) {

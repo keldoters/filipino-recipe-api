@@ -44,6 +44,9 @@ public class Recipe {
                      CascadeType.REFRESH})
     private Set<RecipeIngredient> ingredients;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Override
     public String toString() {
         return "id: " + this.id +
@@ -59,5 +62,7 @@ public class Recipe {
         ingredients.add(recipeIngredient);
         recipeIngredient.setRecipe(this);
     }
+
+
 
 }
