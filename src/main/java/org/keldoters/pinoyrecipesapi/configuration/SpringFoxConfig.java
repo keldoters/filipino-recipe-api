@@ -32,8 +32,8 @@ public class SpringFoxConfig {
                 "1.0",
                 "Free to use",
                 new springfox.documentation.service.Contact("keldoters", "https://github.com/keldoters/pinoy-recipes-api", "N/A"),
-                "API License",
-                "https://github.com/keldoters",
+                "Apache 2.0",
+                "http://www.apache.org/licenses/LICENSE-2.0.html",
                 Collections.emptyList()
         );
     }

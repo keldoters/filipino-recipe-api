@@ -51,7 +51,7 @@ public class RecipeController {
         return new ResponseEntity<>(recipeObj, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "find recipes by category")
+    @ApiOperation(value = "find all categories")
     @GetMapping("/recipe/categories")
     public ResponseEntity<?> getCategories() {
         List<Category> categories = recipeService.findAllCategories();
