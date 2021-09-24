@@ -1,19 +1,17 @@
 package org.keldoters.pinoyrecipesapi.controller;
 
 
+import io.swagger.annotations.ApiOperation;
 import org.keldoters.pinoyrecipesapi.dto.RecipeDTO;
 import org.keldoters.pinoyrecipesapi.model.Category;
-import org.keldoters.pinoyrecipesapi.model.Recipe;
 import org.keldoters.pinoyrecipesapi.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.constraints.Pattern;
-import javax.xml.catalog.Catalog;
 import java.util.*;
+
 
 @Validated
 @RestController
@@ -27,6 +25,8 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
+    @ApiOperation(value = "Search recipe by either name or first letter",
+                  notes = "Use only one parameter")
     @GetMapping("/recipe/search")
     public ResponseEntity<?> searchRecipe(@RequestParam(required = false) String name,
                                           @RequestParam(required = false) String letter) {
@@ -41,6 +41,8 @@ public class RecipeController {
         }
     }
 
+    @ApiOperation(value = "Find recipe by id",
+                  notes = "Use numerical value")
     @GetMapping("/recipe/{recipeId}")
     public ResponseEntity<?> getRecipeById(@PathVariable Long recipeId) {
         Optional<RecipeDTO> recipeDTO = recipeService.findById(recipeId);
@@ -49,12 +51,15 @@ public class RecipeController {
         return new ResponseEntity<>(recipeObj, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "find recipes by category")
     @GetMapping("/recipe/categories")
     public ResponseEntity<?> getCategories() {
         List<Category> categories = recipeService.findAllCategories();
         return new ResponseEntity<>(Map.of("categories", categories), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Filter recipe by either ingredient or category",
+                  notes = "Use only one parameter")
     @GetMapping("/recipe/filter")
     public ResponseEntity<?> filterRecipe(@RequestParam(required = false) String ingredient,
                                           @RequestParam(required = false) String category) {
