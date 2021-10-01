@@ -2,12 +2,16 @@ package org.keldoters.pinoyrecipesapi.controller;
 
 
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.log4j.Log4j2;
 import org.keldoters.pinoyrecipesapi.dto.RecipeDTO;
 import org.keldoters.pinoyrecipesapi.model.Category;
+import org.keldoters.pinoyrecipesapi.security.model.Account;
+import org.keldoters.pinoyrecipesapi.security.repository.AccountRepository;
 import org.keldoters.pinoyrecipesapi.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
@@ -19,14 +23,17 @@ import java.util.*;
 public class RecipeController {
 
     private RecipeService recipeService;
-
+    @Autowired
+    private AccountRepository accountRepository;
+    @Autowired
+    private PasswordEncoder getEncoder;
     @Autowired
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
     @ApiOperation(value = "Search recipe by either name or first letter",
-                  notes = "Use only one parameter")
+            notes = "Use only one parameter")
     @GetMapping("/recipe/search")
     public ResponseEntity<?> searchRecipe(@RequestParam(required = false) String name,
                                           @RequestParam(required = false) String letter) {
@@ -42,7 +49,7 @@ public class RecipeController {
     }
 
     @ApiOperation(value = "Find recipe by id",
-                  notes = "Use numerical value")
+            notes = "Use numerical value")
     @GetMapping("/recipe/{recipeId}")
     public ResponseEntity<?> getRecipeById(@PathVariable Long recipeId) {
         Optional<RecipeDTO> recipeDTO = recipeService.findById(recipeId);
@@ -59,7 +66,7 @@ public class RecipeController {
     }
 
     @ApiOperation(value = "Filter recipe by either ingredient or category",
-                  notes = "Use only one parameter")
+            notes = "Use only one parameter")
     @GetMapping("/recipe/filter")
     public ResponseEntity<?> filterRecipe(@RequestParam(required = false) String ingredient,
                                           @RequestParam(required = false) String category) {
@@ -74,6 +81,4 @@ public class RecipeController {
             return new ResponseEntity<>(Map.of("recipes", new ArrayList<>()), HttpStatus.OK);
         }
     }
-
-
 }
