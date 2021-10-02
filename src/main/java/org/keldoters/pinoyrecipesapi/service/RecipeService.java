@@ -51,9 +51,9 @@ public class RecipeService {
     }
 
     @Transactional
-    public void saveRecipe(RecipeDTO recipeDTO) {
-        Recipe recipe = converter.toDAO(recipeDTO);
-        recipeRepository.save(recipe);
+    public RecipeDTO saveRecipe(RecipeDTO recipeDTO) {
+        Recipe recipe = recipeRepository.save(converter.toDAO(recipeDTO));
+        return new RecipeDTO(recipe);
     }
 
     public List<Category> findAllCategories() {

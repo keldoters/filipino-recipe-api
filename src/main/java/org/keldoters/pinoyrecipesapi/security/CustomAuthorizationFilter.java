@@ -28,30 +28,28 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authorizationHeader = request.getHeader(AUTHORIZATION);
-        if (request.getServletPath().equals("/api/login") || request.getServletPath().equals("/api/token/refresh")) {
-            filterChain.doFilter(request, response);
-        } else if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            try {
-                String token = authorizationHeader.substring("Bearer ".length());
-                DecodedJWT decodedJWT = jwtUtility.verifyToken(token);
-                String email = decodedJWT.getSubject();
-                String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
-                Collection<SimpleGrantedAuthority> authorities = stream(roles)
-                        .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-                UsernamePasswordAuthenticationToken authenticationToken =
-                        new UsernamePasswordAuthenticationToken(email, null, authorities);
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                filterChain.doFilter(request, response);
-            } catch (Exception e) {
-                response.setContentType(APPLICATION_JSON_VALUE);
-                response.setHeader("error", e.getMessage());
-                response.setStatus(FORBIDDEN.value());
-                new ObjectMapper().writeValue(response.getOutputStream(), Map.of("error", e.getMessage()));
+        if (request.getServletPath().equals("/api/v1/recipe")) {
+            String authorizationHeader = request.getHeader(AUTHORIZATION);
+            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+                try {
+                    String token = authorizationHeader.substring("Bearer ".length());
+                    DecodedJWT decodedJWT = jwtUtility.verifyToken(token);
+                    String email = decodedJWT.getSubject();
+                    String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
+                    Collection<SimpleGrantedAuthority> authorities = stream(roles)
+                            .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+                    UsernamePasswordAuthenticationToken authenticationToken =
+                            new UsernamePasswordAuthenticationToken(email, null, authorities);
+                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                } catch (Exception e) {
+                    response.setContentType(APPLICATION_JSON_VALUE);
+                    response.setHeader("error", e.getMessage());
+                    response.setStatus(FORBIDDEN.value());
+                    new ObjectMapper().writeValue(response.getOutputStream(), Map.of("error", e.getMessage()));
+                }
             }
-        } else {
-            filterChain.doFilter(request, response);
         }
+        filterChain.doFilter(request, response);
     }
 }
 

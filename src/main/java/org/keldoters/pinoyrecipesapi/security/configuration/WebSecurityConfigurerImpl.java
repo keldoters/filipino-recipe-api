@@ -66,9 +66,8 @@ public class WebSecurityConfigurerImpl extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(AUTH_WHITELIST).permitAll()
-                .antMatchers(HttpMethod.GET, "/api/v1/recipe/categories").hasAnyAuthority("ROLE_USER")
-                .anyRequest().authenticated();
+                .antMatchers(HttpMethod.POST, "/api/v1/recipe").hasAnyAuthority("ROLE_USER")
+                .anyRequest().permitAll();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(jwtUtility), UsernamePasswordAuthenticationFilter.class);
     }

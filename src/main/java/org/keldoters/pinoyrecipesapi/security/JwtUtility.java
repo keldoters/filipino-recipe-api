@@ -34,7 +34,7 @@ public class JwtUtility {
     public String createRefreshToken(User user, HttpServletRequest request) {
         return JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 3 * 60 * 60 * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 24 * 60 * 60 * 1000L))
                 .withIssuer(request.getRequestURL().toString())
                 .sign(algorithm);
     }

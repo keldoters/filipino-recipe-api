@@ -1,11 +1,15 @@
 package org.keldoters.pinoyrecipesapi.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.keldoters.pinoyrecipesapi.model.Recipe;
 import org.keldoters.pinoyrecipesapi.model.RecipeIngredient;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -13,16 +17,39 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@ApiModel
 public class RecipeDTO {
 
+    @ApiModelProperty(hidden = true, required = false)
     private Long id;
+
+    @ApiModelProperty(position = 1)
+    @NotBlank
     private String name;
+    @NotBlank
+
+    @ApiModelProperty(position = 2)
     private String category;
+
+    @ApiModelProperty(position = 3)
     private String youtubeUrl;
+
+    @ApiModelProperty(position = 4)
     private String cookTime;
+    @Size(min = 1)
+
+    @ApiModelProperty(position = 5)
     private List<String> instruction;
+    @Size(min = 1)
+
+    @ApiModelProperty(position = 6)
     private List<String> ingredients = new ArrayList<>();
+    @Size(min = 1)
+
+    @ApiModelProperty(position = 7)
     private List<String> measurements = new ArrayList<>();
+
+    @ApiModelProperty(position = 8)
     private String imageUrl;
 
 

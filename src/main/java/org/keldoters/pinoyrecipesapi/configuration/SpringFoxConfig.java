@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 @EnableSwagger2
@@ -22,7 +24,8 @@ public class SpringFoxConfig {
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(apiDetails());
+                .apiInfo(apiDetails())
+                .securitySchemes(Arrays.asList(apiKey()));
     }
 
     private ApiInfo apiDetails() {
@@ -30,11 +33,15 @@ public class SpringFoxConfig {
                 "Filipino Recipes API",
                 "API for recipes cooked and prepared in the Philippines",
                 "1.0",
-                "Free to use",
+                "Terms of Service",
                 new springfox.documentation.service.Contact("keldoters", "https://github.com/keldoters/pinoy-recipes-api", "N/A"),
                 "Apache 2.0",
                 "http://www.apache.org/licenses/LICENSE-2.0.html",
                 Collections.emptyList()
         );
+    }
+
+    private ApiKey apiKey() {
+        return new ApiKey("jwtToken", "Authorization", "header");
     }
 }

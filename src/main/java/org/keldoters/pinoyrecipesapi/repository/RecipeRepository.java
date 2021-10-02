@@ -20,7 +20,7 @@ public interface RecipeRepository extends PagingAndSortingRepository<Recipe, Lon
 
     //using distinct because without it the query
     //is returning duplicate entities
-    @Query("SELECT DISTINCT r FROM Recipe r LEFT JOIN FETCH r.ingredients WHERE UPPER(r.name) LIKE CONCAT('%', UPPER(?1), '%')")
+    @Query("SELECT DISTINCT r FROM Recipe r LEFT JOIN FETCH r.ingredients WHERE UPPER(r.name) LIKE CONCAT('%', UPPER(?1), '%') ORDER BY r.name")
     List<Recipe> findByNameContainingIgnoreCase(String name);
 
     @Query("SELECT DISTINCT r FROM Recipe r LEFT JOIN FETCH r.ingredients WHERE UPPER(r.name) LIKE CONCAT(UPPER(?1), '%')")

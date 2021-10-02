@@ -23,10 +23,7 @@ import java.util.*;
 public class RecipeController {
 
     private RecipeService recipeService;
-    @Autowired
-    private AccountRepository accountRepository;
-    @Autowired
-    private PasswordEncoder getEncoder;
+
     @Autowired
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
@@ -80,5 +77,16 @@ public class RecipeController {
         } else {
             return new ResponseEntity<>(Map.of("recipes", new ArrayList<>()), HttpStatus.OK);
         }
+    }
+    @ApiOperation(value = "Save recipe to the database, requires API key", notes = "API key input should begin with \"Bearer \"")
+    @PostMapping("/recipe")
+    public ResponseEntity<?> saveRecipe(@RequestBody RecipeDTO recipeDTO) {
+        List<RecipeDTO> recipes = recipeService.findRecipesByName(recipeDTO.getName());
+        if (recipes.size() > 0) {
+            return new ResponseEntity<>(Map.of("error","Recipe already exists"), HttpStatus.CONFLICT);
+        }
+        RecipeDTO recipe = recipeService.saveRecipe(recipeDTO);
+        return new ResponseEntity<>(recipe, HttpStatus.OK);
+
     }
 }

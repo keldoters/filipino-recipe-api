@@ -15,15 +15,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class Converter {
 
-    private RecipeRepository recipeRepository;
+
     private IngredientRepository ingredientRepository;
     private CategoryRepository categoryRepository;
 
     @Autowired
-    public Converter(RecipeRepository recipeRepository,
-                     IngredientRepository ingredientRepository,
+    public Converter(IngredientRepository ingredientRepository,
                      CategoryRepository categoryRepository) {
-        this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
         this.categoryRepository = categoryRepository;
     }
