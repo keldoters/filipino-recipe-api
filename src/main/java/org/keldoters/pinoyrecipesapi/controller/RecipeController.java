@@ -2,16 +2,12 @@ package org.keldoters.pinoyrecipesapi.controller;
 
 
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.log4j.Log4j2;
 import org.keldoters.pinoyrecipesapi.dto.RecipeDTO;
 import org.keldoters.pinoyrecipesapi.model.Category;
-import org.keldoters.pinoyrecipesapi.security.model.Account;
-import org.keldoters.pinoyrecipesapi.security.repository.AccountRepository;
 import org.keldoters.pinoyrecipesapi.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
@@ -78,7 +74,8 @@ public class RecipeController {
             return new ResponseEntity<>(Map.of("recipes", new ArrayList<>()), HttpStatus.OK);
         }
     }
-    @ApiOperation(value = "Save recipe to the database, requires API key", notes = "API key input should begin with \"Bearer \"")
+    @ApiOperation(value = "Save recipe to the database, requires API key",
+            notes = "API key input should begin with \"Bearer \" in the Authorization header")
     @PostMapping("/recipe")
     public ResponseEntity<?> saveRecipe(@RequestBody RecipeDTO recipeDTO) {
         List<RecipeDTO> recipes = recipeService.findRecipesByName(recipeDTO.getName());
@@ -88,5 +85,12 @@ public class RecipeController {
         RecipeDTO recipe = recipeService.saveRecipe(recipeDTO);
         return new ResponseEntity<>(recipe, HttpStatus.OK);
 
+    }
+    @ApiOperation(value = "Find a random recipe",
+            notes = "produces one recipe object")
+    @GetMapping("/recipe/random")
+    public ResponseEntity<?> randomRecipe() {
+        RecipeDTO recipeDTO = recipeService.randomRecipe();
+        return new ResponseEntity<>(Map.of("recipe", recipeDTO), HttpStatus.OK);
     }
 }

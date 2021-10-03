@@ -31,8 +31,4 @@ public interface RecipeRepository extends PagingAndSortingRepository<Recipe, Lon
 
     @Query("SELECT DISTINCT r FROM Recipe r LEFT JOIN FETCH r.ingredients WHERE UPPER(r.category.name) = UPPER(?1)")
     List<Recipe> findAllByCategory(String category);
-
-
-
-
 }

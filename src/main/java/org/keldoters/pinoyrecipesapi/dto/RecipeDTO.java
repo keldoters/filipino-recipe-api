@@ -20,36 +20,36 @@ import java.util.Set;
 @ApiModel
 public class RecipeDTO {
 
-    @ApiModelProperty(hidden = true, required = false)
+    @ApiModelProperty(hidden = true)
     private Long id;
 
-    @ApiModelProperty(position = 1)
+    @ApiModelProperty(example = "Pork Adobo", position = 1)
     @NotBlank
     private String name;
     @NotBlank
 
-    @ApiModelProperty(position = 2)
+    @ApiModelProperty(example = "Pork", position = 2)
     private String category;
 
-    @ApiModelProperty(position = 3)
+    @ApiModelProperty(example = "https://www.youtube.com/watch?v=Ix5Dnud1bl0", position = 3)
     private String youtubeUrl;
 
-    @ApiModelProperty(position = 4)
+    @ApiModelProperty(example = "1 hour", position = 4)
     private String cookTime;
     @Size(min = 1)
 
-    @ApiModelProperty(position = 5)
+    @ApiModelProperty(example = "[\"Combine the pork belly, soy sauce, and garlic\",\"marinade for at least 1 hour\"]", position = 5)
     private List<String> instruction;
     @Size(min = 1)
 
-    @ApiModelProperty(position = 6)
+    @ApiModelProperty(example = "[\"pork belly\",\"soy sauce\"]", position = 6)
     private List<String> ingredients = new ArrayList<>();
     @Size(min = 1)
 
-    @ApiModelProperty(position = 7)
+    @ApiModelProperty(example = "[\"2 lbs\",\"1/2 cup\",\"AddLine3\",\"AddLine4\"]", position = 7)
     private List<String> measurements = new ArrayList<>();
 
-    @ApiModelProperty(position = 8)
+    @ApiModelProperty(example = "https://res.cloudinary.com/dcikpgyxv/image/upload/v1632424519/Pork%20Adobo.jpg", position = 8)
     private String imageUrl;
 
 
