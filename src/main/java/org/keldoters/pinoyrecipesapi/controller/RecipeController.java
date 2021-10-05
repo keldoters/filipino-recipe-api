@@ -86,8 +86,7 @@ public class RecipeController {
         return new ResponseEntity<>(recipe, HttpStatus.OK);
 
     }
-    @ApiOperation(value = "Find a random recipe",
-            notes = "produces one recipe object")
+    @ApiOperation(value = "Find a random recipe")
     @GetMapping("/recipe/random")
     public ResponseEntity<?> randomRecipe() {
         RecipeDTO recipeDTO = recipeService.randomRecipe();

@@ -2,14 +2,9 @@ package org.keldoters.pinoyrecipesapi;
 
 
 import com.cloudinary.Cloudinary;
-import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
-import org.apache.catalina.authenticator.SpnegoAuthenticator;
-import org.keldoters.pinoyrecipesapi.dto.RecipeDTO;
-import org.keldoters.pinoyrecipesapi.model.Recipe;
 import org.keldoters.pinoyrecipesapi.repository.IngredientRepository;
 import org.keldoters.pinoyrecipesapi.repository.RecipeRepository;
-import org.keldoters.pinoyrecipesapi.security.model.Account;
 import org.keldoters.pinoyrecipesapi.security.repository.AccountRepository;
 import org.keldoters.pinoyrecipesapi.security.service.MyUserDetailsService;
 import org.keldoters.pinoyrecipesapi.service.RecipeService;
@@ -18,16 +13,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
-
 
 @SpringBootApplication
 public class PinoyRecipesApiApplication {
@@ -94,33 +81,7 @@ public class PinoyRecipesApiApplication {
 //			Recipe recipe = recipeRepository.findByIdEagerly(11L).get();
 //			recipe.setYoutubeUrl("https://www.youtube.com/watch?v=mhdQUSXitLU");
 //			recipeRepository.save(recipe);
-//
-//
-//			List<RecipeDTO> recipeDTOList = recipeService.findRecipesByName("menudo");
-//			System.out.println(recipeDTOList);
-//			System.out.println(recipeDTOList.get(0).getIngredients().size() + " = " + recipeDTOList.get(0).getMeasurements().size());
-
-			//register
-//			Account account1 = new Account("recipeDev@gmail.com","Recipeadmin69");
-//			Account account2 = new Account("testDev@gmail.com","Testuser123");
-//			myUserDetailsService.register(account1, "ROLE_ADMIN");
-//			myUserDetailsService.register(account2, "ROLE_USER");
-//			Optional<Account> acc = accountRepository.findAccountByEmail("testDev@gmail.com");
-//			System.out.println("--------");
-//			System.out.println(account2.getPassword());
-//			System.out.println(account2.getId());
-//			System.out.println(acc.get().getPassword());
-//			System.out.println(acc.get().getId());
-//			String hash = getEncoder().encode("Testuser123");
-//			System.out.println(getEncoder().matches("Testuser123", account2.getPassword()));
-//
-//			acc.ifPresent( account -> {
-//				account.getRoles().forEach(role -> System.out.println(role.getName()));
-//			});
-
-
 		});
-
 	}
 
 	@Bean
@@ -136,7 +97,5 @@ public class PinoyRecipesApiApplication {
 	public PasswordEncoder getEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
-
 
 }

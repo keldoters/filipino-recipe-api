@@ -78,6 +78,4 @@ public class WebSecurityConfigurerImpl extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-
-
 }
