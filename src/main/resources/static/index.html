@@ -4,19 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filipino recipe api</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 </head>
 <body>
 <section>
     <header>
-        <h2><a href="" class="logo>">Logo</a></h2>
+        <h2><a href="" class="logo">pinoydish API</a></h2>
         <div class="navigation">
-            <a href="https://github.com/keldoters">Github</a>
-            <a href="./swagger-ui/">Swagger Documentation</a>
+            <a href="https://github.com/keldoters/filipino-recipe-api">Github</a>
+            <a href="./swagger-ui/">Swagger documentation</a>
         </div>
     </header>
+    <div class="note">
+        <p class="method">Saving a recipe to the database requires an <span style="color: darkred">API key</span>, Contact the developer to get one. </p>
+        <p class="method">For more info regarding on how to create and save a recipe, read the <a style="color: cornflowerblue; text-decoration: none" href="./swagger-ui/">swagger docs</a></p>
+    </div>
+    <div class="title">
+        <span>API METHODS</span>
+    </div>
     <div class="content">
         <p class="method">Search recipe by name</p>
-        <p class="example">Search recipe by name</p>
+        <p class="example"><span style="color:lightgreen">GET</span>https://filipino-recipe.herokuapp.com/api/v1/recipe/search?name=Chicken Adobo</p>
+        <p class="method">Search recipes by first letter</p>
+        <p class="example"><span style="color:lightgreen">GET</span>https://filipino-recipe.herokuapp.com/api/v1/recipe/search?letter=c</p>
+        <p class="method">Find recipe by id</p>
+        <p class="example"><span style="color:lightgreen">GET</span>https://filipino-recipe.herokuapp.com/api/v1/recipe/1</p>
+        <p class="method">Filter by category</p>
+        <p class="example"><span style="color:lightgreen">GET</span>https://filipino-recipe.herokuapp.com/api/v1/recipe/filter?category=chicken</p>
+        <p class="method">Filter by ingredient</p>
+        <p class="example"><span style="color:lightgreen">GET</span>https://filipino-recipe.herokuapp.com/api/v1/recipe/filter?ingredient=onion</p>
+        <p class="method">List all categories</p>
+        <p class="example"><span style="color:lightgreen">GET</span>https://filipino-recipe.herokuapp.com/api/v1/recipe/categories</p>
+        <p class="method">Get a random recipe</p>
+        <p class="example"><span style="color:lightgreen">GET</span>https://filipino-recipe.herokuapp.com/api/v1/recipe/random</p>
+    </div>
+    <div class="media-icons">
+        <a href="https://github.com/keldoters/filipino-recipe-api"><i class="fab fa-github-square"></i></a>
     </div>
 </section>
 </body>

@@ -78,9 +78,7 @@ public class PinoyRecipesApiApplication {
 //					.setImageUrl("https://res.cloudinary.com/dcikpgyxv/image/upload/v1632436824/Pork%20Menudo.jpg")
 //					.build();
 //			recipeService.saveRecipe(recipeDTO);
-//			Recipe recipe = recipeRepository.findByIdEagerly(11L).get();
-//			recipe.setYoutubeUrl("https://www.youtube.com/watch?v=mhdQUSXitLU");
-//			recipeRepository.save(recipe);
+//
 		});
 	}
 
