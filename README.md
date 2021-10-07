@@ -1,4 +1,4 @@
-# Filipino recipe API
+# Filipino Recipe API
 Collection of recipes cooked and prepared in the philippines
 
 ## Access to the API
