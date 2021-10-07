@@ -9,6 +9,12 @@ https://filipino-recipe.herokuapp.com
 ```
 visit the site to learn more about the methods. 
 
+for swagger documentation:
+
+```
+https://filipino-recipe.herokuapp.com/swagger-ui/
+```
+
 ## Sample recipe response format
 ```json
 {
