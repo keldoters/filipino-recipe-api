@@ -1,4 +1,4 @@
-# filipino recipe API
+# Filipino recipe API
 Collection of recipes cooked and prepared in the philippines
 
 ## Access to the API
@@ -9,7 +9,7 @@ https://filipino-recipe.herokuapp.com
 ```
 visit the site to learn more about the methods. 
 
-## sample recipe response format
+## Sample recipe response format
 ```json
 {
   "recipe": {
@@ -35,7 +35,7 @@ visit the site to learn more about the methods.
   }
 }
 ```
-## entity diagram
+## Entity diagram
 <img src="diagram.png">
 
 
