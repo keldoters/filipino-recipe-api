@@ -1,6 +1,5 @@
-package org.keldoters.pinoyrecipesapi.security.repository;
+package org.keldoters.pinoyrecipesapi.security.role;
 
-import org.keldoters.pinoyrecipesapi.security.model.Role;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.Optional;

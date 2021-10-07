@@ -1,4 +1,4 @@
-package org.keldoters.pinoyrecipesapi.security;
+package org.keldoters.pinoyrecipesapi.security.jwt;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;

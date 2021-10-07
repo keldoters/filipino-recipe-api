@@ -1,6 +1,6 @@
-package org.keldoters.pinoyrecipesapi.security.repository;
+package org.keldoters.pinoyrecipesapi.security.account;
 
-import org.keldoters.pinoyrecipesapi.security.model.Account;
+import org.keldoters.pinoyrecipesapi.security.account.Account;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

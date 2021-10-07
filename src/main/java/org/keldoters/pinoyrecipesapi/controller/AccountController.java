@@ -1,47 +1,38 @@
 package org.keldoters.pinoyrecipesapi.controller;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiOperation;
-import org.keldoters.pinoyrecipesapi.security.JwtUtility;
-import org.keldoters.pinoyrecipesapi.security.service.MyUserDetailsService;
+import org.keldoters.pinoyrecipesapi.security.jwt.JwtUtility;
+import org.keldoters.pinoyrecipesapi.security.account.AccountDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/api")
 public class AccountController {
 
     private final JwtUtility jwtUtility;
-    private final MyUserDetailsService myUserDetailsService;
+    private final AccountDetailsService accountDetailsService;
 
     @Autowired
-    public AccountController(JwtUtility jwtUtility, MyUserDetailsService myUserDetailsService) {
+    public AccountController(JwtUtility jwtUtility, AccountDetailsService accountDetailsService) {
         this.jwtUtility = jwtUtility;
-        this.myUserDetailsService = myUserDetailsService;
+        this.accountDetailsService = accountDetailsService;
     }
 
     @ApiOperation(value = "Get a new access token after expiration",
@@ -54,7 +45,7 @@ public class AccountController {
                 String refreshToken = authorizationHeader.substring("Bearer ".length());
                 DecodedJWT decodedJWT = jwtUtility.verifyToken(refreshToken);
                 String email = decodedJWT.getSubject();
-                User user = (User) myUserDetailsService.loadUserByUsername(email);
+                User user = (User) accountDetailsService.loadUserByUsername(email);
                 String accessToken = jwtUtility.createAccessToken(user, request);
                 Map<String, String> tokens = new HashMap<>();
                 tokens.put("access_token", accessToken);

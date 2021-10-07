@@ -1,11 +1,9 @@
-package org.keldoters.pinoyrecipesapi.security.service;
+package org.keldoters.pinoyrecipesapi.security.account;
 
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.keldoters.pinoyrecipesapi.security.model.Account;
-import org.keldoters.pinoyrecipesapi.security.model.Role;
-import org.keldoters.pinoyrecipesapi.security.repository.AccountRepository;
-import org.keldoters.pinoyrecipesapi.security.repository.RoleRepository;
+import org.keldoters.pinoyrecipesapi.security.account.Account;
+import org.keldoters.pinoyrecipesapi.security.role.Role;
+import org.keldoters.pinoyrecipesapi.security.account.AccountRepository;
+import org.keldoters.pinoyrecipesapi.security.role.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -20,14 +18,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class AccountDetailsService implements UserDetailsService {
 
     private final AccountRepository accountRepository;
     private final PasswordEncoder getEncoder;
     private final RoleRepository roleRepository;
 
     @Autowired
-    public MyUserDetailsService(AccountRepository accountRepository, PasswordEncoder getEncoder, RoleRepository roleRepository) {
+    public AccountDetailsService(AccountRepository accountRepository, PasswordEncoder getEncoder, RoleRepository roleRepository) {
         this.accountRepository = accountRepository;
         this.getEncoder = getEncoder;
         this.roleRepository = roleRepository;

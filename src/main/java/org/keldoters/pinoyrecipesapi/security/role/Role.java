@@ -1,11 +1,11 @@
-package org.keldoters.pinoyrecipesapi.security.model;
+package org.keldoters.pinoyrecipesapi.security.role;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.keldoters.pinoyrecipesapi.security.account.Account;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter

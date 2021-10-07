@@ -1,13 +1,12 @@
-package org.keldoters.pinoyrecipesapi.security.model;
+package org.keldoters.pinoyrecipesapi.security.account;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
+import org.keldoters.pinoyrecipesapi.security.role.Role;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
