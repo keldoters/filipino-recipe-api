@@ -1,6 +1,7 @@
 # Filipino Recipe API
 Collection of recipes cooked and prepared in the philippines
-Technologies used :
+
+Technologies/Frameworks used :
 - Spring boot
 - Spring security
 - Spring data
