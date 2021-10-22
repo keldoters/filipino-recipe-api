@@ -1,5 +1,10 @@
 # Filipino Recipe API
 Collection of recipes cooked and prepared in the philippines
+Technologies used :
+- Spring boot
+- Spring security
+- Spring data
+- PostgreSQL
 
 ## Access to the API
 All request to the api begin with:
